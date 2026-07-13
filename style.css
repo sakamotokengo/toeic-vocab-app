@@ -215,6 +215,32 @@ button { font-family: inherit; cursor: pointer; }
   text-decoration: underline;
 }
 
+/* ===== 広告枠 ===== */
+.pr-badge {
+  font-size: 10px;
+  font-weight: 700;
+  color: #92400e;
+  background: #fef3c7;
+  border: 1px solid #fcd34d;
+  border-radius: 4px;
+  padding: 1px 6px;
+  vertical-align: middle;
+}
+.ad-item {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 13px 15px;
+  margin-top: 10px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.12s, background 0.12s;
+}
+.ad-item:hover { border-color: var(--accent); background: var(--accent-soft); }
+.ad-title { font-weight: 700; font-size: 14px; }
+.ad-desc { font-size: 13px; color: var(--muted); margin-top: 2px; }
+.ad-cta { font-size: 13px; font-weight: 700; color: var(--accent); margin-top: 6px; }
+
 /* ===== クイズ ===== */
 .q-meta { display: flex; gap: 8px; align-items: center; min-height: 24px; margin-bottom: 4px; }
 .badge {

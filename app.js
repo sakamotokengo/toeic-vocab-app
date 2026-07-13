@@ -140,6 +140,23 @@ function vocabStats() {
 }
 
 // ===== 描画部品 =====
+// 広告枠（ads.jsのAD_ITEMSが空なら何も表示しない）
+function adSection() {
+  if (typeof AD_ITEMS === "undefined" || AD_ITEMS.length === 0) return "";
+  const items = AD_ITEMS.map((a) => `
+    <a class="ad-item" href="${a.url}" target="_blank" rel="nofollow sponsored noopener">
+      <div class="ad-title">${a.title}</div>
+      <div class="ad-desc">${a.desc}</div>
+      <div class="ad-cta">${a.label || "詳しく見る"} →</div>
+    </a>`).join("");
+  return `
+    <section class="card">
+      <h3>おすすめのTOEIC対策 <span class="pr-badge">PR</span></h3>
+      ${items}
+      <p class="muted small" style="margin-top:8px">※上記は広告（アフィリエイトリンク）です。</p>
+    </section>`;
+}
+
 function infoCard(word) {
   return `
     <div class="info-card">
@@ -280,12 +297,15 @@ function renderHome() {
         ${weakHtml}
       </section>
 
+      ${adSection()}
+
       <div class="footer-note">
         <a href="wordlist.html" style="color:var(--accent);font-weight:600">📖 収録単語一覧（全${TOTAL_WORDS}語・例文つき）を見る</a>
       </div>
       <div class="footer-note">
         データはこのブラウザに保存されます ・
-        <button class="reset-link" id="resetBtn">学習データをリセット</button>
+        <button class="reset-link" id="resetBtn">学習データをリセット</button> ・
+        <a href="privacy.html" style="color:var(--muted)">プライバシーポリシー</a>
       </div>
     </main>`;
 
@@ -445,6 +465,7 @@ function renderResult() {
         <h3>間違えた単語（${wrong.length}語）</h3>
         ${wrongHtml}
       </section>
+      ${adSection()}
       <div class="actions">
         <button id="againBtn" class="btn-primary">次の10問へ ▶</button>
         <button id="homeBtn" class="btn-secondary">ホームに戻る</button>

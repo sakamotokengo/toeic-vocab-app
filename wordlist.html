@@ -45,9 +45,12 @@ h2.wl-level { font-size: 17px; }
     <p class="wl-intro" id="wl-count" style="margin-top:8px"></p>
   </section>
   <div id="wl-body"></div>
+  <div id="wl-ads"></div>
   <div class="footer-note"><a class="wl-back" href="./">📘 4択クイズで覚える（無料アプリへ）</a></div>
+  <div class="footer-note"><a href="privacy.html" style="color:var(--muted)">プライバシーポリシー</a></div>
 </main>
 <script src="words.js"></script>
+<script src="ads.js"></script>
 <script>
 "use strict";
 (function () {
@@ -70,6 +73,18 @@ h2.wl-level { font-size: 17px; }
     html += "</section>";
   });
   document.getElementById("wl-body").innerHTML = html;
+
+  if (typeof AD_ITEMS !== "undefined" && AD_ITEMS.length > 0) {
+    var ads = AD_ITEMS.map(function (a) {
+      return '<a class="ad-item" href="' + a.url + '" target="_blank" rel="nofollow sponsored noopener">'
+        + '<div class="ad-title">' + a.title + '</div>'
+        + '<div class="ad-desc">' + a.desc + '</div>'
+        + '<div class="ad-cta">' + (a.label || "詳しく見る") + ' →</div></a>';
+    }).join("");
+    document.getElementById("wl-ads").innerHTML =
+      '<section class="card"><h3>おすすめのTOEIC対策 <span class="pr-badge">PR</span></h3>' + ads
+      + '<p class="muted small" style="margin-top:8px">※上記は広告（アフィリエイトリンク）です。</p></section>';
+  }
 })();
 </script>
 </body>
