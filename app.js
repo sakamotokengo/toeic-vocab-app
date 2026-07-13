@@ -281,6 +281,9 @@ function renderHome() {
       </section>
 
       <div class="footer-note">
+        <a href="wordlist.html" style="color:var(--accent);font-weight:600">📖 収録単語一覧（全${TOTAL_WORDS}語・例文つき）を見る</a>
+      </div>
+      <div class="footer-note">
         データはこのブラウザに保存されます ・
         <button class="reset-link" id="resetBtn">学習データをリセット</button>
       </div>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOEIC頻出単語一覧（例文・覚え方つき） | TOEIC単語トレーナー</title>
+<meta name="description" content="TOEIC頻出英単語をレベル別（基礎〜600点・中級〜730点・上級860点〜）に一覧掲載。すべての単語に例文・和訳・覚え方の豆知識つき。4択クイズで学習できる無料アプリの収録単語リストです。">
+<link rel="canonical" href="https://sakamotokengo.github.io/toeic-vocab-app/wordlist.html">
+<meta property="og:title" content="TOEIC頻出単語一覧（例文・覚え方つき）">
+<meta property="og:description" content="TOEIC頻出英単語をレベル別に一覧掲載。例文・和訳・覚え方の豆知識つき。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sakamotokengo.github.io/toeic-vocab-app/wordlist.html">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📘</text></svg>">
+<link rel="stylesheet" href="style.css">
+<style>
+.wl-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.wl-back { font-size: 13px; font-weight: 700; color: var(--accent); text-decoration: none; white-space: nowrap; }
+.wl-back:hover { text-decoration: underline; }
+.wl-intro { font-size: 14px; color: var(--muted); }
+.wl-word { padding: 14px 0; border-bottom: 1px solid var(--border); }
+.wl-word:last-child { border-bottom: none; }
+.wl-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.wl-en { font-size: 17px; font-weight: 800; }
+.wl-ja { font-weight: 700; color: var(--accent-dark); }
+.wl-ex { font-size: 13px; margin-top: 4px; border-left: 3px solid var(--border); padding-left: 10px; }
+.wl-ex .en { font-style: italic; }
+.wl-ex .ja { color: var(--muted); }
+.wl-tip { font-size: 13px; margin-top: 4px; color: #713f12; background: #fefce8; border-radius: 8px; padding: 6px 10px; }
+h2.wl-level { font-size: 17px; }
+</style>
+</head>
+<body>
+<div class="topbar wl-header">
+  <h1>📘 TOEIC頻出単語一覧</h1>
+  <a class="wl-back" href="./">← クイズアプリへ</a>
+</div>
+<main class="container">
+  <section class="card">
+    <h2 style="font-size:16px">この単語リストについて</h2>
+    <p class="wl-intro" style="margin-top:8px">
+      TOEICに頻出する英単語を、目標スコア別の3レベルに分けて掲載しています。
+      すべての単語にTOEICの出題場面を意識した例文（英文・和訳）と、覚え方や用途の豆知識が付いています。
+      <a href="./">無料の4択クイズアプリ</a>では、これらの単語を10問ずつ出題し、間違えた単語を自動で復習出題します。
+    </p>
+    <p class="wl-intro" id="wl-count" style="margin-top:8px"></p>
+  </section>
+  <div id="wl-body"></div>
+  <div class="footer-note"><a class="wl-back" href="./">📘 4択クイズで覚える（無料アプリへ）</a></div>
+</main>
+<script src="words.js"></script>
+<script>
+"use strict";
+(function () {
+  var LEVELS = { 1: "基礎レベル（TOEIC 〜600点目標）", 2: "中級レベル（TOEIC 〜730点目標）", 3: "上級レベル（TOEIC 860点〜目標）" };
+  var counts = { 1: 0, 2: 0, 3: 0 };
+  WORDS.forEach(function (w) { counts[w.lv]++; });
+  document.getElementById("wl-count").textContent =
+    "収録単語数：全" + WORDS.length + "語（基礎" + counts[1] + "語・中級" + counts[2] + "語・上級" + counts[3] + "語）";
+
+  var html = "";
+  [1, 2, 3].forEach(function (lv) {
+    html += '<section class="card"><h2 class="wl-level">' + LEVELS[lv] + "</h2>";
+    WORDS.filter(function (w) { return w.lv === lv; }).forEach(function (w) {
+      html += '<div class="wl-word">'
+        + '<div class="wl-head"><span class="wl-en">' + w.w + '</span><span class="wl-ja">' + w.m + "</span></div>"
+        + '<div class="wl-ex"><div class="en">' + w.ex + '</div><div class="ja">' + w.exJa + "</div></div>"
+        + '<div class="wl-tip">💡 ' + w.tip + "</div>"
+        + "</div>";
+    });
+    html += "</section>";
+  });
+  document.getElementById("wl-body").innerHTML = html;
+})();
+</script>
+</body>
+</html>
