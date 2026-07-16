@@ -148,7 +148,7 @@ function adSection() {
       <div class="ad-title">${a.title}</div>
       <div class="ad-desc">${a.desc}</div>
       <div class="ad-cta">${a.label || "詳しく見る"} →</div>
-    </a>`).join("");
+    </a>${a.beacon ? `<img src="${a.beacon}" width="1" height="1" border="0" alt="" style="position:absolute;left:-9999px">` : ""}`).join("");
   return `
     <section class="card">
       <h3>おすすめのTOEIC対策 <span class="pr-badge">PR</span></h3>

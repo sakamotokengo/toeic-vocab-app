@@ -79,7 +79,8 @@ h2.wl-level { font-size: 17px; }
       return '<a class="ad-item" href="' + a.url + '" target="_blank" rel="nofollow sponsored noopener">'
         + '<div class="ad-title">' + a.title + '</div>'
         + '<div class="ad-desc">' + a.desc + '</div>'
-        + '<div class="ad-cta">' + (a.label || "詳しく見る") + ' →</div></a>';
+        + '<div class="ad-cta">' + (a.label || "詳しく見る") + ' →</div></a>'
+        + (a.beacon ? '<img src="' + a.beacon + '" width="1" height="1" border="0" alt="" style="position:absolute;left:-9999px">' : '');
     }).join("");
     document.getElementById("wl-ads").innerHTML =
       '<section class="card"><h3>おすすめのTOEIC対策 <span class="pr-badge">PR</span></h3>' + ads
