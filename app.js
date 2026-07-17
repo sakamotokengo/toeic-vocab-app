@@ -58,8 +58,21 @@ function buildQueue(num) {
   retry.forEach((w) => reviewSet.add(w.w));
   due.forEach((w) => reviewSet.add(w.w));
 
-  const fresh = shuffle(WORDS.filter((w) => inFilter(w) && stat(w.w).seen === 0))
-    .sort((a, b) => a.lv - b.lv); // 安定ソートなので同レベル内はランダム順のまま
+  // 未学習語はレベルを横断してバランスよく混ぜる（基礎→中級→上級の順に1語ずつ交互）
+  const freshPools = [1, 2, 3].map((lv) =>
+    shuffle(WORDS.filter((w) => w.lv === lv && inFilter(w) && stat(w.w).seen === 0))
+  );
+  const fresh = [];
+  let poolRemaining = true;
+  while (poolRemaining) {
+    poolRemaining = false;
+    for (const pool of freshPools) {
+      if (pool.length > 0) {
+        fresh.push(pool.shift());
+        poolRemaining = true;
+      }
+    }
+  }
   const rest = WORDS.filter((w) => {
     const s = stat(w.w);
     return inFilter(w) && s.seen > 0 && !s.retry && s.due == null;

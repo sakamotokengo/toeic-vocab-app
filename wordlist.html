@@ -43,6 +43,11 @@ h2.wl-level { font-size: 17px; }
       <a href="./">無料の4択クイズアプリ</a>では、これらの単語を10問ずつ出題し、間違えた単語を自動で復習出題します。
     </p>
     <p class="wl-intro" id="wl-count" style="margin-top:8px"></p>
+    <p style="margin-top:10px">
+      <a class="wl-back" href="#lv1">▼ 基礎</a>
+      <a class="wl-back" href="#lv2">▼ 中級</a>
+      <a class="wl-back" href="#lv3">▼ 上級</a>
+    </p>
   </section>
   <div id="wl-body"></div>
   <div id="wl-ads"></div>
@@ -62,7 +67,7 @@ h2.wl-level { font-size: 17px; }
 
   var html = "";
   [1, 2, 3].forEach(function (lv) {
-    html += '<section class="card"><h2 class="wl-level">' + LEVELS[lv] + "</h2>";
+    html += '<section class="card" id="lv' + lv + '"><h2 class="wl-level">' + LEVELS[lv] + "</h2>";
     WORDS.filter(function (w) { return w.lv === lv; }).forEach(function (w) {
       html += '<div class="wl-word">'
         + '<div class="wl-head"><span class="wl-en">' + w.w + '</span><span class="wl-ja">' + w.m + "</span></div>"
